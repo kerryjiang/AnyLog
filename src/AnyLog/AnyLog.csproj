@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="ILog.cs" />
     <Compile Include="ILogFactory.cs" />
+    <Compile Include="LogFactoryBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
