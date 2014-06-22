@@ -1,4 +1,4 @@
 AnyLog
 ======
 
-A logging framework abstraction like Common.Logging but will be better than it in some aspects
+A logging framework abstraction like Common.Logging but will be simpler than it and better in some aspects
