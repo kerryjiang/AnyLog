@@ -224,5 +224,22 @@ namespace AnyLog.EnterpriseLibrary
         {
             Write(string.Format(format, arg0, arg1, arg2), m_Category, TraceEventType.Warning);
         }
+
+
+        public void Log(LoggingData loggingData)
+        {
+            var logEntry = new LogEntry();
+
+            logEntry.Message = loggingData.Message;
+            logEntry.AppDomainName = loggingData.Domain;
+            logEntry.AddErrorMessage(loggingData.ExceptionString);
+            logEntry.Categories = new string[] { loggingData.LoggerName };
+            //logEntry.Severity = s_LevelDict[loggingData.Level];
+            logEntry.ManagedThreadName = loggingData.ThreadName;
+            logEntry.TimeStamp = loggingData.TimeStamp;
+            //logEntry.LoggedSeverity = loggingData.UserName;
+
+            m_LogWriter.Write(logEntry);
+        }
     }
 }

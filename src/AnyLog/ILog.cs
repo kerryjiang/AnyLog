@@ -310,5 +310,10 @@ namespace AnyLog
         /// <param name="arg2">The arg2.</param>
         void WarnFormat(string format, object arg0, object arg1, object arg2);
 
+        /// <summary>
+        /// Logs the specified logging data.
+        /// </summary>
+        /// <param name="loggingData">The logging data.</param>
+        void Log(LoggingData loggingData);
     }
 }
