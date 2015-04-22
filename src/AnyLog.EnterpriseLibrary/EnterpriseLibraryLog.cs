@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Microsoft.Practices.EnterpriseLibrary.Logging;
 using AnyLog;
+using System.Collections.Generic;
 
 namespace AnyLog.EnterpriseLibrary
 {
@@ -13,6 +14,29 @@ namespace AnyLog.EnterpriseLibrary
         private const string m_MessageTemplate3 = "{0}\r\n{1}\r\n{2}";
 
         private LogWriter m_LogWriter;
+
+        private static Dictionary<string, TraceEventType> s_EventTypeDict;
+
+        static EnterpriseLibraryLog()
+        {
+            s_EventTypeDict = new Dictionary<string, TraceEventType>(StringComparer.OrdinalIgnoreCase);
+            s_EventTypeDict.Add("Alert", TraceEventType.Warning);
+            s_EventTypeDict.Add("All", TraceEventType.Information);
+            s_EventTypeDict.Add("Critical", TraceEventType.Critical);
+            s_EventTypeDict.Add("Debug", TraceEventType.Verbose);
+            s_EventTypeDict.Add("Emergency", TraceEventType.Critical);
+            s_EventTypeDict.Add("Error", TraceEventType.Error);
+            s_EventTypeDict.Add("Fatal", TraceEventType.Critical);
+            s_EventTypeDict.Add("Fine", TraceEventType.Information);
+            s_EventTypeDict.Add("Finer", TraceEventType.Information);
+            s_EventTypeDict.Add("Finest", TraceEventType.Information);
+            s_EventTypeDict.Add("Info", TraceEventType.Information);
+            s_EventTypeDict.Add("Notice", TraceEventType.Information);
+            s_EventTypeDict.Add("Severe", TraceEventType.Critical);
+            s_EventTypeDict.Add("Trace", TraceEventType.Verbose);
+            s_EventTypeDict.Add("Verbose", TraceEventType.Verbose);
+            s_EventTypeDict.Add("Warn", TraceEventType.Warning);
+        }
 
         public EnterpriseLibraryLog(LogWriter logWriter, string category)
         {
@@ -234,10 +258,16 @@ namespace AnyLog.EnterpriseLibrary
             logEntry.AppDomainName = loggingData.Domain;
             logEntry.AddErrorMessage(loggingData.ExceptionString);
             logEntry.Categories = new string[] { loggingData.LoggerName };
-            //logEntry.Severity = s_LevelDict[loggingData.Level];
+
+            TraceEventType eventType;
+
+            if (!s_EventTypeDict.TryGetValue(loggingData.Level, out eventType))
+                eventType = TraceEventType.Information;
+
+            logEntry.Severity = eventType;
+
             logEntry.ManagedThreadName = loggingData.ThreadName;
             logEntry.TimeStamp = loggingData.TimeStamp;
-            //logEntry.LoggedSeverity = loggingData.UserName;
 
             m_LogWriter.Write(logEntry);
         }
