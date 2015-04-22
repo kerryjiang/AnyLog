@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnyLog.Log4Net", "AnyLog.Lo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnyLog.EnterpriseLibrary", "AnyLog.EnterpriseLibrary\AnyLog.EnterpriseLibrary.csproj", "{C04B5B26-FA1A-46AE-8CCF-66DB0E01FB71}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnyLog.NLog", "AnyLog.NLog\AnyLog.NLog.csproj", "{574733C8-0D9D-40C0-9E4A-B0F993498A62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{C04B5B26-FA1A-46AE-8CCF-66DB0E01FB71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C04B5B26-FA1A-46AE-8CCF-66DB0E01FB71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C04B5B26-FA1A-46AE-8CCF-66DB0E01FB71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{574733C8-0D9D-40C0-9E4A-B0F993498A62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{574733C8-0D9D-40C0-9E4A-B0F993498A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{574733C8-0D9D-40C0-9E4A-B0F993498A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{574733C8-0D9D-40C0-9E4A-B0F993498A62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
