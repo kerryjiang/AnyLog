@@ -36,6 +36,7 @@ namespace AnyLog
                 if(File.Exists(filePath))
                 {
                     ConfigFile = filePath;
+                    break;
                 }
             }
         }
