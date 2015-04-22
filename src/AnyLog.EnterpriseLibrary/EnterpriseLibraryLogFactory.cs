@@ -44,51 +44,16 @@ namespace AnyLog.EnterpriseLibrary
             return new EnterpriseLibraryLog(m_LogWriter, name);
         }
 
-        private ConcurrentDictionary<string, Lazy<LogWriter>> m_LoggerRepositories = new ConcurrentDictionary<string, Lazy<LogWriter>>();
-
-        private Lazy<LogWriter> CreateLazyRepository(string repositoryName)
+        protected override ILogInventory CreateLogInventory()
         {
-            var configFilePath = GetRepositoryConfigFile(repositoryName);
-
-            if (!File.Exists(configFilePath))
-                return null;
-
-            return new Lazy<LogWriter>(() =>
-            {
-                var factory = new LogWriterFactory(new FileConfigurationSource(configFilePath));
-                return factory.Create();
-            });
-        }
-
-        private LogWriter EnsureRepository(string repositoryName)
-        {
-            Lazy<LogWriter> repository;
-
-            if (m_LoggerRepositories.TryGetValue(repositoryName, out repository))
-                return repository.Value;
-
-            repository = CreateLazyRepository(repositoryName);
-
-            if (repository == null)
-                return null;
-
-            if (m_LoggerRepositories.TryAdd(repositoryName, repository))
-                return repository.Value;
-
-            return EnsureRepository(repositoryName);
-        }
-
-        protected override ILog CreateLogFromRepository(string repositoryName, string name)
-        {
-            // try to create log
-            // get log respostory at first
-            LogWriter writer = EnsureRepository(repositoryName);
-
-            // repository is not found
-            if (writer == null)
-                return null;
-
-            return new EnterpriseLibraryLog(writer, name);
+            return new LogInventory<LogWriter>(
+                (name) => GetRepositoryConfigFile(name),
+                (name, file) =>
+                {
+                    var factory = new LogWriterFactory(new FileConfigurationSource(file));
+                    return factory.Create();
+                },
+                (resp, name) => new EnterpriseLibraryLog(resp, name));
         }
     }
 }

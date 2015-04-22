@@ -18,11 +18,17 @@ namespace AnyLog
         /// </summary>
         protected string ConfigFile { get; private set; }
 
+        protected LogFactoryBase()
+        {
+            m_LogInventory = CreateLogInventory();
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LogFactoryBase"/> class.
         /// </summary>
         /// <param name="configFiles">All the potential configuration files, order by priority.</param>
         protected LogFactoryBase(string[] configFiles)
+            : this()
         {
             foreach (var file in configFiles)
             {
@@ -59,6 +65,10 @@ namespace AnyLog
         /// <returns></returns>
         public abstract ILog GetLog(string name);
 
+        protected abstract ILogInventory CreateLogInventory();
+
+        private ILogInventory m_LogInventory;
+
         private ConcurrentDictionary<string, ILog> m_LoggersDict = new ConcurrentDictionary<string, ILog>(StringComparer.OrdinalIgnoreCase);
 
         /// <summary>
@@ -71,14 +81,6 @@ namespace AnyLog
         {
             get { return m_LoggersDict; }
         }
-
-        /// <summary>
-        /// Creates the log from repository.
-        /// </summary>
-        /// <param name="repositoryName">Name of the repository.</param>
-        /// <param name="name">The name of the log.</param>
-        /// <returns></returns>
-        protected abstract ILog CreateLogFromRepository(string repositoryName, string name);
 
         /// <summary>
         /// Gets the log from the specific repository.
@@ -97,7 +99,7 @@ namespace AnyLog
             if (loggerDict.TryGetValue(logKey, out log))
                 return log;
 
-            log = CreateLogFromRepository(repositoryName, name);
+            log = m_LogInventory.CreateLogFromRepository(repositoryName, name);
 
             if (log == null)
                 return null;

@@ -46,6 +46,7 @@
     <Compile Include="ILogFactoryMetadata.cs" />
     <Compile Include="LocationInfo.cs" />
     <Compile Include="LogFactoryBase.cs" />
+    <Compile Include="LogInventory.cs" />
     <Compile Include="LoggingData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
