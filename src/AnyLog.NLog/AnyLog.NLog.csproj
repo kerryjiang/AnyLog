@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AnyLog\GlobalAssemblyInfo.cs">
+      <Link>GlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="NLogLog.cs" />
     <Compile Include="NLogLogFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GlobalAssemblyInfo.cs" />
     <Compile Include="ConsoleLog.cs" />
     <Compile Include="ConsoleLogFactory.cs" />
     <Compile Include="ILog.cs" />
