@@ -1,0 +1,18 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>AnyLog.Log4Net</id>
+    <version>0.1</version>
+    <title>AnyLog.Log4Net</title>
+    <authors>Kerry Jiang</authors>
+    <owners>Kerry Jiang</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
+    <projectUrl>https://github.com/kerryjiang/AnyLog</projectUrl>
+    <iconUrl></iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Log4Net adapter for AnyLog.</description>
+    <releaseNotes>First release of Log4Net.</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>Logging Adapter Log4Net</tags>
+  </metadata>
+</package>

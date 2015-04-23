@@ -53,6 +53,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="AnyLog.Log4Net.nuspec">
+      <LastGenOutput>AnyLog.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
