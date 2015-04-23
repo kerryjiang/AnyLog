@@ -1,16 +1,15 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>AnyLog</id>
-    <version>0.1</version>
-    <title>AnyLog</title>
-    <authors>Kerry Jiang</authors>
-    <owners>Kerry Jiang</owners>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
     <projectUrl>https://github.com/kerryjiang/AnyLog</projectUrl>
-    <iconUrl></iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A common logging abstraction for .Net, it is similar with Common.Logging but it does something Common.Logging cannot support.</description>
+    <description>$description$</description>
     <releaseNotes>First release of AnyLog.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Logging Adapter Common</tags>
