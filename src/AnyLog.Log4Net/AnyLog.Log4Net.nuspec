@@ -13,5 +13,9 @@
     <releaseNotes>First release of Log4Net.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Logging Adapter Log4Net</tags>
+    <dependencies>
+      <dependency id="AnyLog" version="$version$" />
+      <dependency id="log4net" version="2.0.3" />
+    </dependencies>
   </metadata>
 </package>

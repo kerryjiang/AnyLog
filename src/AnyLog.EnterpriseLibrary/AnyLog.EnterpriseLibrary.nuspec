@@ -13,5 +13,8 @@
     <releaseNotes>First release of AnyLog.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Logging Adapter EnterpriseLibrary</tags>
+    <dependencies>
+      <dependency id="AnyLog" version="$version$" />
+    </dependencies>
   </metadata>
 </package>

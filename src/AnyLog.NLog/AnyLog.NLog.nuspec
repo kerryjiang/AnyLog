@@ -12,6 +12,10 @@
     <description>$description$</description>
     <releaseNotes>First release of Log4Net.</releaseNotes>
     <copyright>Copyright 2015</copyright>
-    <tags>Logging Adapter NLog</tags>
+    <tags>Logging Adapter NLog</tags>  
+    <dependencies>
+      <dependency id="AnyLog" version="$version$" />
+      <dependency id="NLog" version="3.2.0.0" />
+    </dependencies>
   </metadata>
 </package>
