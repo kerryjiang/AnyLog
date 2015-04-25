@@ -17,27 +17,21 @@ namespace AnyLog.Log4Net
     /// </summary>
     [Export(typeof(ILogFactory))]
     [ExportMetadata("Name", "Log4Net")]
-    [ExportMetadata("ConfigFileName", c_ConfigFileName)]
+    [ExportMetadata("ConfigFileName", "log4net.config")]
     public class Log4NetLogFactory : LogFactoryBase
     {
-        private const string c_ConfigFileName = "log4net.config";
         /// <summary>
-        /// Initializes a new instance of the <see cref="Log4NetLogFactory"/> class.
-        /// </summary>
-        public Log4NetLogFactory()
-            : this(new string[] { c_ConfigFileName })
-        {
-
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Log4NetLogFactory"/> class.
+        /// Initializes the specified configuration files, we only use the first found one
         /// </summary>
         /// <param name="configFiles">All the potential configuration files, order by priority.</param>
-        public Log4NetLogFactory(string[] configFiles)
-            : base(configFiles)
+        /// <returns></returns>
+        public override bool Initialize(string[] configFiles)
         {
+            if (!base.Initialize(configFiles))
+                return false;
+
             log4net.Config.XmlConfigurator.Configure(new FileInfo(ConfigFile));
+            return true;
         }
 
         /// <summary>

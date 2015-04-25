@@ -11,6 +11,13 @@ namespace AnyLog
     public interface ILogFactory
     {
         /// <summary>
+        /// Initializes the specified configuration files, we only use the first found one
+        /// </summary>
+        /// <param name="configFiles">All the potential configuration files, order by priority.</param>
+        /// <returns></returns>
+        bool Initialize(string[] configFiles);
+
+        /// <summary>
         /// Gets the log by name.
         /// </summary>
         /// <param name="name">The name.</param>

@@ -18,17 +18,12 @@ namespace AnyLog
         /// </summary>
         protected string ConfigFile { get; private set; }
 
-        protected LogFactoryBase()
-        {
-            m_LogInventory = CreateLogInventory();
-        }
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="LogFactoryBase"/> class.
+        /// Initializes the specified configuration files, we only use the first found one
         /// </summary>
         /// <param name="configFiles">All the potential configuration files, order by priority.</param>
-        protected LogFactoryBase(string[] configFiles)
-            : this()
+        /// <returns></returns>
+        public virtual bool Initialize(string[] configFiles)
         {
             foreach (var file in configFiles)
             {
@@ -39,12 +34,15 @@ namespace AnyLog
                     filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filePath);
                 }
 
-                if(File.Exists(filePath))
+                if (File.Exists(filePath))
                 {
                     ConfigFile = filePath;
-                    break;
+                    m_LogInventory = CreateLogInventory();
+                    return true;
                 }
             }
+
+            return false;
         }
 
         protected virtual string GetRepositoryConfigFile(string repositoryName)

@@ -13,30 +13,27 @@ namespace AnyLog.EnterpriseLibrary
 {
     [Export(typeof(ILogFactory))]
     [ExportMetadata("Name", "EnterpriseLibraryLogging")]
-    [ExportMetadata("ConfigFileName", c_ConfigFileName)]
+    [ExportMetadata("ConfigFileName", "logging.config")]
     public class EnterpriseLibraryLogFactory : LogFactoryBase
     {
         private LogWriter m_LogWriter;
 
-        private const string c_ConfigFileName = "logging.config";
-
-        public EnterpriseLibraryLogFactory()
-            : this(new string[] { c_ConfigFileName })
-        {
-
-        }
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="EnterpriseLibraryLogFactory"/> class.
+        /// Initializes the specified configuration files, we only use the first found one
         /// </summary>
         /// <param name="configFiles">All the potential configuration files, order by priority.</param>
-        public EnterpriseLibraryLogFactory(string[] configFiles) :
-            base(configFiles)
+        /// <returns></returns>
+        public override bool Initialize(string[] configFiles)
         {
+            if (!base.Initialize(configFiles))
+                return false;
+
             var configurationSource = new FileConfigurationSource(this.ConfigFile);
 
             var factory = new LogWriterFactory(configurationSource);
             m_LogWriter = factory.Create();
+
+            return true;
         }
 
         public override ILog GetLog(string name)

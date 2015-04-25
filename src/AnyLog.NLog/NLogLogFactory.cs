@@ -12,33 +12,27 @@ namespace AnyLog.NLog
 {
     [Export(typeof(ILogFactory))]
     [ExportMetadata("Name", "NLog")]
-    [ExportMetadata("ConfigFileName", c_ConfigFileName)]
+    [ExportMetadata("ConfigFileName", "nlog.config")]
     public class NLogLogFactory : LogFactoryBase
     {
-        private const string c_ConfigFileName = "nlog.config";
-
         private XmlLoggingConfiguration m_DefaultConfig;
 
         private LogFactory m_DefaultLogFactory;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NLogLogFactory"/> class.
-        /// </summary>
-        public NLogLogFactory()
-            : this(new string[] { c_ConfigFileName })
-        {
-
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NLogLogFactory"/> class.
+        /// Initializes the specified configuration files, we only use the first found one
         /// </summary>
         /// <param name="configFiles">All the potential configuration files, order by priority.</param>
-        public NLogLogFactory(string[] configFiles)
-            : base(configFiles)
+        /// <returns></returns>
+        public override bool Initialize(string[] configFiles)
         {
+            if (!base.Initialize(configFiles))
+                return false;
+
             m_DefaultConfig = new XmlLoggingConfiguration(ConfigFile) { AutoReload = true };
             m_DefaultLogFactory = new LogFactory(m_DefaultConfig);
+
+            return true;
         }
 
         protected override ILogInventory CreateLogInventory()

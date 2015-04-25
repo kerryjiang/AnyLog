@@ -15,20 +15,15 @@ namespace AnyLog
     public class ConsoleLogFactory : ILogFactory
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConsoleLogFactory"/> class.
+        /// Initializes the specified configuration files, we only use the first found one
         /// </summary>
-        public ConsoleLogFactory()
+        /// <param name="configFiles">All the potential configuration files, order by priority.</param>
+        /// <returns></returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public bool Initialize(string[] configFiles)
         {
-
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ConsoleLogFactory"/> class.
-        /// </summary>
-        /// <param name="configFiles">The configuration files.</param>
-        public ConsoleLogFactory(string[] configFiles)
-        {
-
+            // Do nothing
+            return true;
         }
 
         /// <summary>
