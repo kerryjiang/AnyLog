@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/kerryjiang/AnyLog</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>First release of Log4Net.</releaseNotes>
+    <releaseNotes>First release of Log4Net adapter of AnyLog.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Logging Adapter Log4Net</tags>
     <dependencies>
