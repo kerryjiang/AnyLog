@@ -13,6 +13,7 @@ namespace AnyLog.NLog
     [Export(typeof(ILogFactory))]
     [ExportMetadata("Name", "NLog")]
     [ExportMetadata("ConfigFileName", "nlog.config")]
+    [ExportMetadata("Priority", "10")]
     public class NLogLogFactory : LogFactoryBase
     {
         private XmlLoggingConfiguration m_DefaultConfig;

@@ -14,6 +14,7 @@ namespace AnyLog.EnterpriseLibrary
     [Export(typeof(ILogFactory))]
     [ExportMetadata("Name", "EnterpriseLibraryLogging")]
     [ExportMetadata("ConfigFileName", "logging.config")]
+    [ExportMetadata("Priority", "20")]
     public class EnterpriseLibraryLogFactory : LogFactoryBase
     {
         private LogWriter m_LogWriter;

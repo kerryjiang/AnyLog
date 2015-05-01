@@ -53,10 +53,10 @@ namespace AnyLog
             if (exportProvider == null)
                 throw new ArgumentNullException("exportProvider");
 
-            var lazyLogFactory = string.IsNullOrEmpty(logFactoryName)
-                ? exportProvider.GetExports<ILogFactory, ILogFactoryMetadata>().FirstOrDefault()
-                : exportProvider.GetExports<ILogFactory, ILogFactoryMetadata>().Where(
-                    f => f.Metadata.Name.Equals(logFactoryName, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+            var lazyLogFactory = exportProvider.GetExports<ILogFactory, ILogFactoryMetadata>()
+                    .Where(f => string.IsNullOrEmpty(logFactoryName) || f.Metadata.Name.Equals(logFactoryName, StringComparison.OrdinalIgnoreCase))
+                    .OrderBy(f => f.Metadata.Priority)
+                    .FirstOrDefault();
 
             if (lazyLogFactory == null)
                 return;

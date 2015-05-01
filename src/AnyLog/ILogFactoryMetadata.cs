@@ -25,5 +25,14 @@ namespace AnyLog
         /// The name of the configuration file.
         /// </value>
         string ConfigFileName { get; }
+
+
+        /// <summary>
+        /// Gets the loading priority.
+        /// </summary>
+        /// <value>
+        /// The loading priority.
+        /// </value>
+        int Priority { get; }
     }
 }
