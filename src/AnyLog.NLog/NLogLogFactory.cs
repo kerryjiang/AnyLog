@@ -5,7 +5,7 @@ using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
 using System.Text;
-using NLog;
+using NLogRef = NLog;
 using NLog.Config;
 
 namespace AnyLog.NLog
@@ -17,7 +17,7 @@ namespace AnyLog.NLog
     {
         private XmlLoggingConfiguration m_DefaultConfig;
 
-        private LogFactory m_DefaultLogFactory;
+        private NLogRef.LogFactory m_DefaultLogFactory;
 
         /// <summary>
         /// Initializes the specified configuration files, we only use the first found one
@@ -30,16 +30,16 @@ namespace AnyLog.NLog
                 return false;
 
             m_DefaultConfig = new XmlLoggingConfiguration(ConfigFile) { AutoReload = true };
-            m_DefaultLogFactory = new LogFactory(m_DefaultConfig);
+            m_DefaultLogFactory = new NLogRef.LogFactory(m_DefaultConfig);
 
             return true;
         }
 
         protected override ILogInventory CreateLogInventory()
         {
-            return new LogInventory<LogFactory>(
+            return new LogInventory<NLogRef.LogFactory>(
                 (name) => GetRepositoryConfigFile(name),
-                (name, file) => new LogFactory(new XmlLoggingConfiguration(file) { AutoReload = true }),
+                (name, file) => new NLogRef.LogFactory(new XmlLoggingConfiguration(file) { AutoReload = true }),
                 (resp, name) => new NLogLog(resp.GetLogger(name)));
         }
 
