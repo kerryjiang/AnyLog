@@ -63,8 +63,12 @@ namespace AnyLog
 
             var metadata = lazyLogFactory.Metadata;
             var configFiles = new List<string>();
-            configFiles.Add(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, metadata.ConfigFileName));
-            configFiles.Add(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Config"), metadata.ConfigFileName));
+
+            if (!string.IsNullOrEmpty(metadata.ConfigFileName))
+            {
+                configFiles.Add(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, metadata.ConfigFileName));
+                configFiles.Add(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Config"), metadata.ConfigFileName));
+            }
 
             var facotry = lazyLogFactory.Value;
 
