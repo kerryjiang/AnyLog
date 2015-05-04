@@ -10,9 +10,7 @@ namespace AnyLog
     /// Console log factory
     /// </summary>
     [Export(typeof(ILogFactory))]
-    [ExportMetadata("Name", "ConsoleLog")]
-    [ExportMetadata("ConfigFileName", "")]
-    [ExportMetadata("Priority", "99999")]
+    [LogFactoryMetadata("ConsoleLog", Priority = 99999)]
     public class ConsoleLogFactory : ILogFactory
     {
         /// <summary>

@@ -48,6 +48,7 @@
     <Compile Include="LocationInfo.cs" />
     <Compile Include="LogFactory.cs" />
     <Compile Include="LogFactoryBase.cs" />
+    <Compile Include="LogFactoryMetadataAttribute.cs" />
     <Compile Include="LogInventory.cs" />
     <Compile Include="LoggingData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -16,9 +16,7 @@ namespace AnyLog.Log4Net
     /// Log4NetLogFactory
     /// </summary>
     [Export(typeof(ILogFactory))]
-    [ExportMetadata("Name", "Log4Net")]
-    [ExportMetadata("ConfigFileName", "log4net.config")]
-    [ExportMetadata("Priority", "1")]
+    [LogFactoryMetadata("Log4Net", ConfigFileName = "log4net.config", Priority = 1)]
     public class Log4NetLogFactory : LogFactoryBase
     {
         /// <summary>
