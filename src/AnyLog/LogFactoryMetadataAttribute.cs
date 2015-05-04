@@ -6,6 +6,8 @@ using System.Text;
 
 namespace AnyLog
 {
+    [MetadataAttribute]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class LogFactoryMetadataAttribute : ExportAttribute, ILogFactoryMetadata
     {
         public string Name { get; private set; }
