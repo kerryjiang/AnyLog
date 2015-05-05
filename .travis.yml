@@ -1,0 +1,2 @@
+language: csharp
+solution: src/AnyLog.2013.sln
