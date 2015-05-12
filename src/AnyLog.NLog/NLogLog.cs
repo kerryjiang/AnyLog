@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using NLog;
@@ -248,8 +249,27 @@ namespace AnyLog.NLog
             logEvent.Message = loggingData.Message;
             logEvent.TimeStamp = loggingData.TimeStamp;
 
-            //logEvent.Exception = loggingData.ExceptionString;
-            //logEvent.Properties = loggingData.Properties;
+            if (!string.IsNullOrEmpty(loggingData.ExceptionString))
+                logEvent.Exception = new Exception(loggingData.ExceptionString);
+
+            if (loggingData.Properties != null && loggingData.Properties.Count > 0)
+            {
+                var properties = loggingData.Properties;
+                var dict = new Dictionary<object, object>();
+
+                foreach(var k in properties.Keys.OfType<string>())
+                {
+                    properties.Add(k, properties[k]);
+                }
+            }
+
+            if(loggingData.LocationInfo != null)
+            {
+                var locationInfo = loggingData.LocationInfo;
+                var lineNumber = 0;
+                int.TryParse(locationInfo.LineNumber, out lineNumber);
+                logEvent.SetStackTrace(new StackTrace(new StackFrame(locationInfo.FileName, lineNumber)), 0);
+            }
 
             LogLevel level;
 
