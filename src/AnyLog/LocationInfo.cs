@@ -9,7 +9,7 @@ namespace AnyLog
     /// <summary>
     /// location info
     /// </summary>
-    public struct LocationInfo
+    public class LocationInfo
     {
         /// <summary>
         /// Gets or sets the name of the class.
