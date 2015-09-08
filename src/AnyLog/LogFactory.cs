@@ -36,6 +36,12 @@ namespace AnyLog
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(LogFactory).Assembly));
             catalog.Catalogs.Add(new DirectoryCatalog(AppDomain.CurrentDomain.BaseDirectory, "*.dll"));
 
+            //For website, all assemblies locate in bin directory
+            var binDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin");
+
+            if(Directory.Exists(binDir))
+                catalog.Catalogs.Add(new DirectoryCatalog(binDir, "*.dll"));
+
             //Create the CompositionContainer with the parts in the catalog
             var container = new CompositionContainer(catalog);
 
