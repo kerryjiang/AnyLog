@@ -48,6 +48,8 @@
     <Compile Include="ILog.cs" />
     <Compile Include="ILogFactory.cs" />
     <Compile Include="ILogFactoryMetadata.cs" />
+    <Compile Include="ILogFactoryProvider.cs" />
+    <Compile Include="ILoggerProvider.cs" />
     <Compile Include="LocationInfo.cs" />
     <Compile Include="LogFactory.cs" />
     <Compile Include="LogFactoryBase.cs" />
