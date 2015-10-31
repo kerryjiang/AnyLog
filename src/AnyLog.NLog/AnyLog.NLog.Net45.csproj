@@ -60,7 +60,7 @@
     <None Include="AnyLog.NLog.nuspec">
       <LastGenOutput>AnyLog.cs</LastGenOutput>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.AnyLog.NLog.Net45.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

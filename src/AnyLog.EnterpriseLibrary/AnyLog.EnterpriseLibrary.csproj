@@ -80,7 +80,7 @@
     <None Include="AnyLog.EnterpriseLibrary.nuspec">
       <LastGenOutput>AnyLog.cs</LastGenOutput>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.AnyLog.EnterpriseLibrary.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AnyLog\AnyLog.csproj">
