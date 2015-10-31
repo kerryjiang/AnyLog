@@ -111,5 +111,30 @@ namespace AnyLog
                     return log;
             }
         }
+
+        public ILog GetCurrentClassLogger()
+        {
+            return GetLog(GetClassName(false));
+        }
+
+        public ILog GetCurrentClassLogger(bool shortName)
+        {
+            return GetLog(GetClassName(shortName));
+        }
+
+        private static string GetClassName(bool shortName)
+        {
+            int framesToSkip = 2;
+
+            var frame = new StackFrame(framesToSkip, false);
+
+            var method = frame.GetMethod();
+            var declaringType = method.DeclaringType;
+
+            if (declaringType == null)
+                return method.Name;
+
+            return shortName ? declaringType.Name : declaringType.FullName;
+        }
     }
 }
