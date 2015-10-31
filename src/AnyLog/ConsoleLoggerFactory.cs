@@ -11,7 +11,7 @@ namespace AnyLog
     /// </summary>
     [Export(typeof(ILoggerFactory))]
     [LoggerFactoryMetadata("Console", Priority = 99999)]
-    public class ConsoleLoggerFactory : ILoggerFactory
+    public class ConsoleLoggerFactory : LoggerFactoryBase
     {
         /// <summary>
         /// Initializes the specified configuration files, we only use the first found one
@@ -19,7 +19,7 @@ namespace AnyLog
         /// <param name="configFiles">All the potential configuration files, order by priority.</param>
         /// <returns></returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public bool Initialize(string[] configFiles)
+        public override bool Initialize(string[] configFiles)
         {
             // Do nothing
             return true;
@@ -30,7 +30,7 @@ namespace AnyLog
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns></returns>
-        public ILog GetLogger(string name)
+        public override ILog GetLogger(string name)
         {
             return new ConsoleLogger(name);
         }
@@ -43,7 +43,7 @@ namespace AnyLog
         /// <param name="name">The name.</param>
         /// <returns></returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public ILog GetLogger(string repositoryName, string name)
+        public override ILog GetLogger(string repositoryName, string name)
         {
             return new ConsoleLogger(repositoryName + " -> " + name);
         }

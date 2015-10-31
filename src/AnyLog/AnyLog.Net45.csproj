@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdvanceLoggerFactory.cs" />
     <Compile Include="ConsoleLogger.cs" />
     <Compile Include="ConsoleLoggerFactory.cs" />
     <Compile Include="GlobalAssemblyInfo.cs" />
@@ -54,7 +55,7 @@
     <Compile Include="LoggerFactory.cs" />
     <Compile Include="LoggerFactoryBase.cs" />
     <Compile Include="LoggerFactoryMetadataAttribute.cs" />
-    <Compile Include="LogInventory.cs" />
+    <Compile Include="LoggerInventory.cs" />
     <Compile Include="LoggingData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -31,5 +31,19 @@ namespace AnyLog
         /// <param name="name">The name.</param>
         /// <returns></returns>
         ILog GetLogger(string repositoryName, string name);
+
+
+        /// <summary>
+        /// Gets the current class logger.
+        /// </summary>
+        /// <returns></returns>
+        ILog GetCurrentClassLogger();
+
+        /// <summary>
+        /// Gets the current class logger.
+        /// </summary>
+        /// <param name="shortName">if set to <c>true</c> [short name].</param>
+        /// <returns></returns>
+        ILog GetCurrentClassLogger(bool shortName);
     }
 }

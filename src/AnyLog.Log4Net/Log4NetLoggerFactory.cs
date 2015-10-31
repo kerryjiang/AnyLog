@@ -17,7 +17,7 @@ namespace AnyLog.Log4Net
     /// </summary>
     [Export(typeof(ILoggerFactory))]
     [LoggerFactoryMetadata("Log4Net", ConfigFileName = "log4net.config", Priority = 1)]
-    public class Log4NetLoggerFactory : LoggerFactoryBase
+    public class Log4NetLoggerFactory : AdvanceLoggerFactory
     {
         /// <summary>
         /// Initializes the specified configuration files, we only use the first found one

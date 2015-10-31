@@ -14,47 +14,11 @@ namespace AnyLog
     public abstract class LoggerFactoryBase : ILoggerFactory
     {
         /// <summary>
-        /// Gets the config file file path.
-        /// </summary>
-        protected string ConfigFile { get; private set; }
-
-        /// <summary>
-        /// Initializes the specified configuration files, we only use the first found one
+        /// Initializes with the specified configuration files, we only use the first found one
         /// </summary>
         /// <param name="configFiles">All the potential configuration files, order by priority.</param>
         /// <returns></returns>
-        public virtual bool Initialize(string[] configFiles)
-        {
-            foreach (var file in configFiles)
-            {
-                var filePath = file;
-
-                if (!Path.IsPathRooted(filePath))
-                {
-                    filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filePath);
-                }
-
-                if (File.Exists(filePath))
-                {
-                    ConfigFile = filePath;
-                    m_LoggerInventory = CreateLoggerInventory();
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        protected virtual string GetRepositoryConfigFile(string repositoryName)
-        {
-            var configFile = ConfigFile;
-            var directory = Path.GetDirectoryName(configFile);
-            var name = Path.GetFileNameWithoutExtension(configFile);
-            var extension = Path.GetExtension(configFile);
-
-            configFile = string.Format("{0}.{1}{2}", name, repositoryName, extension);
-            return Path.Combine(directory, configFile);
-        }
+        public abstract bool Initialize(string[] configFiles);
 
         /// <summary>
         /// Gets the logger by name.
@@ -63,60 +27,29 @@ namespace AnyLog
         /// <returns></returns>
         public abstract ILog GetLogger(string name);
 
-        protected abstract ILoggerInventory CreateLoggerInventory();
-
-        private ILoggerInventory m_LoggerInventory;
-
-        private ConcurrentDictionary<string, ILog> m_LoggersDict = new ConcurrentDictionary<string, ILog>(StringComparer.OrdinalIgnoreCase);
 
         /// <summary>
-        /// Gets the loggers dictionary, the key composite with repository name and log name.
-        /// </summary>
-        /// <value>
-        /// The loggers dictionary.
-        /// </value>
-        protected ConcurrentDictionary<string, ILog> LoggersDict
-        {
-            get { return m_LoggersDict; }
-        }
-
-        /// <summary>
-        /// Gets the log from the specific repository.
+        /// Gets the logger from the specific repository.
         /// </summary>
         /// <param name="repositoryName">Name of the repository.</param>
         /// <param name="name">The name.</param>
         /// <returns></returns>
-        public virtual ILog GetLogger(string repositoryName, string name)
-        {
-            var logKey = repositoryName + "-" + name;
+        public abstract ILog GetLogger(string repositoryName, string name);
 
-            ILog log;
-
-            var loggerDict = LoggersDict;
-
-            if (loggerDict.TryGetValue(logKey, out log))
-                return log;
-
-            log = m_LoggerInventory.CreateLoggerFromRepository(repositoryName, name);
-
-            if (log == null)
-                return null;
-
-            while (true)
-            {
-                if (loggerDict.TryAdd(logKey, log))
-                    return log;
-
-                if (loggerDict.TryGetValue(logKey, out log))
-                    return log;
-            }
-        }
-
+        /// <summary>
+        /// Gets the current class logger.
+        /// </summary>
+        /// <returns></returns>
         public ILog GetCurrentClassLogger()
         {
             return GetLogger(GetClassName(false));
         }
 
+        /// <summary>
+        /// Gets the current class logger.
+        /// </summary>
+        /// <param name="shortName">if set to <c>true</c> [short name].</param>
+        /// <returns></returns>
         public ILog GetCurrentClassLogger(bool shortName)
         {
             return GetLogger(GetClassName(shortName));

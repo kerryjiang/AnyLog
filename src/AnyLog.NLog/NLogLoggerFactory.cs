@@ -12,7 +12,7 @@ namespace AnyLog.NLog
 {
     [Export(typeof(ILoggerFactory))]
     [LoggerFactoryMetadata("NLog", ConfigFileName = "nlog.config", Priority = 10)]
-    public class NLogLoggerFactory : LoggerFactoryBase
+    public class NLogLoggerFactory : AdvanceLoggerFactory
     {
         private XmlLoggingConfiguration m_DefaultConfig;
 

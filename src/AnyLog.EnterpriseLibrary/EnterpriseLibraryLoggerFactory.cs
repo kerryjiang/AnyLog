@@ -13,7 +13,7 @@ namespace AnyLog.EnterpriseLibrary
 {
     [Export(typeof(ILoggerFactory))]
     [LoggerFactoryMetadata("EnterpriseLibraryLogging", ConfigFileName = "logging.config", Priority = 20)]
-    public class EnterpriseLibraryLoggerFactory : LoggerFactoryBase
+    public class EnterpriseLibraryLoggerFactory : AdvanceLoggerFactory
     {
         private LogWriter m_LogWriter;
 
