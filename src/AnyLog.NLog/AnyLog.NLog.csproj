@@ -43,8 +43,8 @@
     <Compile Include="..\AnyLog\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="NLogLog.cs" />
-    <Compile Include="NLogLogFactory.cs" />
+    <Compile Include="NLogLogger.cs" />
+    <Compile Include="NLogLoggerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

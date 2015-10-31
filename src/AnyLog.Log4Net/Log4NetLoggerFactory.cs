@@ -15,9 +15,9 @@ namespace AnyLog.Log4Net
     /// <summary>
     /// Log4NetLogFactory
     /// </summary>
-    [Export(typeof(ILogFactory))]
-    [LogFactoryMetadata("Log4Net", ConfigFileName = "log4net.config", Priority = 1)]
-    public class Log4NetLogFactory : LogFactoryBase
+    [Export(typeof(ILoggerFactory))]
+    [LoggerFactoryMetadata("Log4Net", ConfigFileName = "log4net.config", Priority = 1)]
+    public class Log4NetLoggerFactory : LoggerFactoryBase
     {
         /// <summary>
         /// Initializes the specified configuration files, we only use the first found one
@@ -34,18 +34,18 @@ namespace AnyLog.Log4Net
         }
 
         /// <summary>
-        /// Gets the log by name.
+        /// Gets the logger by name.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns></returns>
-        public override ILog GetLog(string name)
+        public override ILog GetLogger(string name)
         {
-            return new Log4NetLog(LogManager.GetLogger(name));
+            return new Log4NetLogger(LogManager.GetLogger(name));
         }
 
-        protected override ILogInventory CreateLogInventory()
+        protected override ILoggerInventory CreateLoggerInventory()
         {
-            return new LogInventory<ILoggerRepository>(
+            return new LoggerInventory<ILoggerRepository>(
                 (name) => GetRepositoryConfigFile(name),
                 (name, file) =>
                 {
@@ -53,7 +53,7 @@ namespace AnyLog.Log4Net
                     log4net.Config.XmlConfigurator.ConfigureAndWatch(repository, new FileInfo(file));
                     return repository;
                 },
-                (resp, name) => new Log4NetLog(LogManager.GetLogger(resp.Name, name)));
+                (resp, name) => new Log4NetLogger(LogManager.GetLogger(resp.Name, name)));
         }
     }
 }

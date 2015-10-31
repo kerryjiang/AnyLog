@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace AnyLog.EnterpriseLibrary
 {
-    public class EnterpriseLibraryLog : ILog
+    public class EnterpriseLibraryLogger : ILog
     {
         private string m_Category;
 
@@ -17,7 +17,7 @@ namespace AnyLog.EnterpriseLibrary
 
         private static Dictionary<string, TraceEventType> s_EventTypeDict;
 
-        static EnterpriseLibraryLog()
+        static EnterpriseLibraryLogger()
         {
             s_EventTypeDict = new Dictionary<string, TraceEventType>(StringComparer.OrdinalIgnoreCase);
             s_EventTypeDict.Add("Alert", TraceEventType.Warning);
@@ -38,7 +38,7 @@ namespace AnyLog.EnterpriseLibrary
             s_EventTypeDict.Add("Warn", TraceEventType.Warning);
         }
 
-        public EnterpriseLibraryLog(LogWriter logWriter, string category)
+        public EnterpriseLibraryLogger(LogWriter logWriter, string category)
         {
             m_LogWriter = logWriter;
             m_Category = category;

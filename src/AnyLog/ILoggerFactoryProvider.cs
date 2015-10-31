@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace AnyLog
 {
-    public interface ILogFactoryProvider
+    public interface ILoggerFactoryProvider
     {
-        ILogFactory LogFactory { get; }
+        ILoggerFactory LoggerFactory { get; }
     }
 }

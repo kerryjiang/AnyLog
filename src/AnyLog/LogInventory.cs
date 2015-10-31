@@ -7,25 +7,25 @@ using System.Text;
 
 namespace AnyLog
 {
-    public interface ILogInventory
+    public interface ILoggerInventory
     {
-        ILog CreateLogFromRepository(string repositoryName, string name);
+        ILog CreateLoggerFromRepository(string repositoryName, string name);
     }
 
-    public class LogInventory<T> : ILogInventory
+    public class LoggerInventory<T> : ILoggerInventory
         where T : class
     {
         private ConcurrentDictionary<string, Lazy<T>> m_LoggerRepositories = new ConcurrentDictionary<string, Lazy<T>>();
 
         private Func<string, string> m_RepositoryConfigGetter;
         private Func<string, string, T> m_RepositoryCreator;
-        private Func<T, string, ILog> m_LogCreator;
+        private Func<T, string, ILog> m_LoggerCreator;
 
-        public LogInventory(Func<string, string> repositoryConfigGetter, Func<string, string, T> repositoryCreator, Func<T, string, ILog> logCreator)
+        public LoggerInventory(Func<string, string> repositoryConfigGetter, Func<string, string, T> repositoryCreator, Func<T, string, ILog> loggerCreator)
         {
             m_RepositoryConfigGetter = repositoryConfigGetter;
             m_RepositoryCreator = repositoryCreator;
-            m_LogCreator = logCreator;
+            m_LoggerCreator = loggerCreator;
         }
 
         private Lazy<T> CreateLazyRepository(string repositoryName)
@@ -59,7 +59,7 @@ namespace AnyLog
             return EnsureRepository(repositoryName);
         }
 
-        public ILog CreateLogFromRepository(string repositoryName, string name)
+        public ILog CreateLoggerFromRepository(string repositoryName, string name)
         {
             // try to create log
             // get log respostory at first
@@ -69,7 +69,7 @@ namespace AnyLog
             if (repository == null)
                 return null;
 
-            return m_LogCreator(repository, name);
+            return m_LoggerCreator(repository, name);
         }
     }
 }

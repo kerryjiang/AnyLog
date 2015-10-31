@@ -10,9 +10,9 @@ using NLog.Config;
 
 namespace AnyLog.NLog
 {
-    [Export(typeof(ILogFactory))]
-    [LogFactoryMetadata("NLog", ConfigFileName = "nlog.config", Priority = 10)]
-    public class NLogLogFactory : LogFactoryBase
+    [Export(typeof(ILoggerFactory))]
+    [LoggerFactoryMetadata("NLog", ConfigFileName = "nlog.config", Priority = 10)]
+    public class NLogLoggerFactory : LoggerFactoryBase
     {
         private XmlLoggingConfiguration m_DefaultConfig;
 
@@ -34,23 +34,23 @@ namespace AnyLog.NLog
             return true;
         }
 
-        protected override ILogInventory CreateLogInventory()
+        protected override ILoggerInventory CreateLoggerInventory()
         {
-            return new LogInventory<NLogRef.LogFactory>(
+            return new LoggerInventory<NLogRef.LogFactory>(
                 (name) => GetRepositoryConfigFile(name),
                 (name, file) => new NLogRef.LogFactory(new XmlLoggingConfiguration(file) { AutoReload = true }),
-                (resp, name) => new NLogLog(resp.GetLogger(name)));
+                (resp, name) => new NLogLogger(resp.GetLogger(name)));
         }
 
         /// <summary>
-        /// Gets the log by name.
+        /// Gets the logger by name.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns></returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public override ILog GetLog(string name)
+        public override ILog GetLogger(string name)
         {
-            return new NLogLog(m_DefaultLogFactory.GetLogger(name));
+            return new NLogLogger(m_DefaultLogFactory.GetLogger(name));
         }
     }
 }

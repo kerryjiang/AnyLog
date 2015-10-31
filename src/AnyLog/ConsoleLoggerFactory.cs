@@ -9,9 +9,9 @@ namespace AnyLog
     /// <summary>
     /// Console log factory
     /// </summary>
-    [Export(typeof(ILogFactory))]
-    [LogFactoryMetadata("ConsoleLog", Priority = 99999)]
-    public class ConsoleLogFactory : ILogFactory
+    [Export(typeof(ILoggerFactory))]
+    [LoggerFactoryMetadata("Console", Priority = 99999)]
+    public class ConsoleLoggerFactory : ILoggerFactory
     {
         /// <summary>
         /// Initializes the specified configuration files, we only use the first found one
@@ -26,26 +26,26 @@ namespace AnyLog
         }
 
         /// <summary>
-        /// Gets the log by name.
+        /// Gets the logger by name.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns></returns>
-        public ILog GetLog(string name)
+        public ILog GetLogger(string name)
         {
-            return new ConsoleLog(name);
+            return new ConsoleLogger(name);
         }
 
 
         /// <summary>
-        /// Gets the log from the specific repository.
+        /// Gets the logger from the specific repository.
         /// </summary>
         /// <param name="repositoryName">Name of the repository.</param>
         /// <param name="name">The name.</param>
         /// <returns></returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public ILog GetLog(string repositoryName, string name)
+        public ILog GetLogger(string repositoryName, string name)
         {
-            return new ConsoleLog(repositoryName + " -> " + name);
+            return new ConsoleLogger(repositoryName + " -> " + name);
         }
     }
 }

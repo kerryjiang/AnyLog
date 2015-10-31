@@ -8,7 +8,7 @@ namespace AnyLog
 {
     [MetadataAttribute]
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public class LogFactoryMetadataAttribute : ExportAttribute, ILogFactoryMetadata
+    public class LoggerFactoryMetadataAttribute : ExportAttribute, ILoggerFactoryMetadata
     {
         public string Name { get; private set; }
 
@@ -16,7 +16,7 @@ namespace AnyLog
 
         public int Priority { get; set; }
 
-        public LogFactoryMetadataAttribute(string name)
+        public LoggerFactoryMetadataAttribute(string name)
             : base()
         {
             Name = name;

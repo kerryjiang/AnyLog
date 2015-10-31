@@ -11,9 +11,9 @@ using System.Text;
 
 namespace AnyLog.EnterpriseLibrary
 {
-    [Export(typeof(ILogFactory))]
-    [LogFactoryMetadata("EnterpriseLibraryLogging", ConfigFileName = "logging.config", Priority = 20)]
-    public class EnterpriseLibraryLogFactory : LogFactoryBase
+    [Export(typeof(ILoggerFactory))]
+    [LoggerFactoryMetadata("EnterpriseLibraryLogging", ConfigFileName = "logging.config", Priority = 20)]
+    public class EnterpriseLibraryLoggerFactory : LoggerFactoryBase
     {
         private LogWriter m_LogWriter;
 
@@ -35,21 +35,21 @@ namespace AnyLog.EnterpriseLibrary
             return true;
         }
 
-        public override ILog GetLog(string name)
+        public override ILog GetLogger(string name)
         {
-            return new EnterpriseLibraryLog(m_LogWriter, name);
+            return new EnterpriseLibraryLogger(m_LogWriter, name);
         }
 
-        protected override ILogInventory CreateLogInventory()
+        protected override ILoggerInventory CreateLoggerInventory()
         {
-            return new LogInventory<LogWriter>(
+            return new LoggerInventory<LogWriter>(
                 (name) => GetRepositoryConfigFile(name),
                 (name, file) =>
                 {
                     var factory = new LogWriterFactory(new FileConfigurationSource(file));
                     return factory.Create();
                 },
-                (resp, name) => new EnterpriseLibraryLog(resp, name));
+                (resp, name) => new EnterpriseLibraryLogger(resp, name));
         }
     }
 }

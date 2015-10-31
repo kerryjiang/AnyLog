@@ -1,42 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text;
-using log4net.Core;
 
-namespace AnyLog.Log4Net
+namespace AnyLog
 {
     /// <summary>
-    /// Log4NetLog
+    /// Console Log
     /// </summary>
-    public class Log4NetLog : ILog
+    public class ConsoleLogger : ILog
     {
-        private static readonly IDictionary<string, Level> s_LevelDict;
+        private string m_Name;
 
-        static Log4NetLog()
-        {
-            s_LevelDict = new Dictionary<string, Level>();
+        private const string m_MessageTemplate = "{0}-{1}: {2}";
 
-            foreach (var field in typeof(Level).GetFields(BindingFlags.Static | BindingFlags.Public))
-            {
-                var level = (Level)field.GetValue(null);
-                s_LevelDict.Add(level.Name, level);
-            }
-        }
+        private const string m_Debug = "DEBUG";
 
-        private log4net.ILog m_Log;
+        private const string m_Error = "ERROR";
+
+        private const string m_Fatal = "FATAL";
+
+        private const string m_Info = "INFO";
+
+        private const string m_Warn = "WARN";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Log4NetLog"/> class.
+        /// Initializes a new instance of the <see cref="ConsoleLogger"/> class.
         /// </summary>
-        /// <param name="log">The log.</param>
-        public Log4NetLog(log4net.ILog log)
+        /// <param name="name">The name.</param>
+        public ConsoleLogger(string name)
         {
-            if (log == null)
-                throw new ArgumentNullException("log");
-
-            m_Log = log;
+            m_Name = name;
         }
 
         /// <summary>
@@ -47,7 +41,7 @@ namespace AnyLog.Log4Net
         /// </value>
         public bool IsDebugEnabled
         {
-            get { return m_Log.IsDebugEnabled; }
+            get { return true; }
         }
 
         /// <summary>
@@ -58,7 +52,7 @@ namespace AnyLog.Log4Net
         /// </value>
         public bool IsErrorEnabled
         {
-            get { return m_Log.IsErrorEnabled; }
+            get { return true; }
         }
 
         /// <summary>
@@ -69,7 +63,7 @@ namespace AnyLog.Log4Net
         /// </value>
         public bool IsFatalEnabled
         {
-            get { return m_Log.IsFatalEnabled; }
+            get { return true; }
         }
 
         /// <summary>
@@ -80,7 +74,7 @@ namespace AnyLog.Log4Net
         /// </value>
         public bool IsInfoEnabled
         {
-            get { return m_Log.IsInfoEnabled; }
+            get { return true; }
         }
 
         /// <summary>
@@ -91,7 +85,7 @@ namespace AnyLog.Log4Net
         /// </value>
         public bool IsWarnEnabled
         {
-            get { return m_Log.IsWarnEnabled; }
+            get { return true; }
         }
 
         /// <summary>
@@ -100,7 +94,7 @@ namespace AnyLog.Log4Net
         /// <param name="message">The message.</param>
         public void Debug(object message)
         {
-            m_Log.Debug(message);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Debug, message);
         }
 
         /// <summary>
@@ -110,7 +104,7 @@ namespace AnyLog.Log4Net
         /// <param name="exception">The exception.</param>
         public void Debug(object message, Exception exception)
         {
-            m_Log.Debug(message, exception);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Debug, message + Environment.NewLine + exception.Message + exception.StackTrace);
         }
 
         /// <summary>
@@ -120,7 +114,7 @@ namespace AnyLog.Log4Net
         /// <param name="arg0">The arg0.</param>
         public void DebugFormat(string format, object arg0)
         {
-            m_Log.DebugFormat(format, arg0);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Debug, string.Format(format, arg0));
         }
 
         /// <summary>
@@ -130,7 +124,7 @@ namespace AnyLog.Log4Net
         /// <param name="args">The args.</param>
         public void DebugFormat(string format, params object[] args)
         {
-            m_Log.DebugFormat(format, args);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Debug, string.Format(format, args));
         }
 
         /// <summary>
@@ -141,7 +135,7 @@ namespace AnyLog.Log4Net
         /// <param name="args">The args.</param>
         public void DebugFormat(IFormatProvider provider, string format, params object[] args)
         {
-            m_Log.DebugFormat(provider, format, args);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Debug, string.Format(provider, format, args));
         }
 
         /// <summary>
@@ -152,7 +146,7 @@ namespace AnyLog.Log4Net
         /// <param name="arg1">The arg1.</param>
         public void DebugFormat(string format, object arg0, object arg1)
         {
-            m_Log.DebugFormat(format, arg0, arg1);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Debug, string.Format(format, arg0, arg1));
         }
 
         /// <summary>
@@ -164,7 +158,7 @@ namespace AnyLog.Log4Net
         /// <param name="arg2">The arg2.</param>
         public void DebugFormat(string format, object arg0, object arg1, object arg2)
         {
-            m_Log.DebugFormat(format, arg0, arg1, arg2);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Debug, string.Format(format, arg0, arg1, arg2));
         }
 
         /// <summary>
@@ -173,7 +167,7 @@ namespace AnyLog.Log4Net
         /// <param name="message">The message.</param>
         public void Error(object message)
         {
-            m_Log.Error(message);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Error, message);
         }
 
         /// <summary>
@@ -183,7 +177,7 @@ namespace AnyLog.Log4Net
         /// <param name="exception">The exception.</param>
         public void Error(object message, Exception exception)
         {
-            m_Log.Error(message, exception);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Error, message + Environment.NewLine + exception.Message + exception.StackTrace);
         }
 
         /// <summary>
@@ -193,7 +187,7 @@ namespace AnyLog.Log4Net
         /// <param name="arg0">The arg0.</param>
         public void ErrorFormat(string format, object arg0)
         {
-            m_Log.ErrorFormat(format, arg0);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Error, string.Format(format, arg0));
         }
 
         /// <summary>
@@ -203,7 +197,7 @@ namespace AnyLog.Log4Net
         /// <param name="args">The args.</param>
         public void ErrorFormat(string format, params object[] args)
         {
-            m_Log.ErrorFormat(format, args);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Error, string.Format(format, args));
         }
 
         /// <summary>
@@ -214,7 +208,7 @@ namespace AnyLog.Log4Net
         /// <param name="args">The args.</param>
         public void ErrorFormat(IFormatProvider provider, string format, params object[] args)
         {
-            m_Log.ErrorFormat(provider, format, args);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Error, string.Format(provider, format, args));
         }
 
         /// <summary>
@@ -225,7 +219,7 @@ namespace AnyLog.Log4Net
         /// <param name="arg1">The arg1.</param>
         public void ErrorFormat(string format, object arg0, object arg1)
         {
-            m_Log.ErrorFormat(format, arg0, arg1);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Error, string.Format(format, arg0, arg1));
         }
 
         /// <summary>
@@ -237,7 +231,7 @@ namespace AnyLog.Log4Net
         /// <param name="arg2">The arg2.</param>
         public void ErrorFormat(string format, object arg0, object arg1, object arg2)
         {
-            m_Log.ErrorFormat(format, arg0, arg1, arg2);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Error, string.Format(format, arg0, arg2));
         }
 
         /// <summary>
@@ -246,7 +240,7 @@ namespace AnyLog.Log4Net
         /// <param name="message">The message.</param>
         public void Fatal(object message)
         {
-            m_Log.Fatal(message);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Fatal, message);
         }
 
         /// <summary>
@@ -256,7 +250,7 @@ namespace AnyLog.Log4Net
         /// <param name="exception">The exception.</param>
         public void Fatal(object message, Exception exception)
         {
-            m_Log.Fatal(message, exception);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Fatal, message + Environment.NewLine + exception.Message + exception.StackTrace);
         }
 
         /// <summary>
@@ -266,7 +260,7 @@ namespace AnyLog.Log4Net
         /// <param name="arg0">The arg0.</param>
         public void FatalFormat(string format, object arg0)
         {
-            m_Log.FatalFormat(format, arg0);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Fatal, string.Format(format, arg0));
         }
 
         /// <summary>
@@ -276,7 +270,7 @@ namespace AnyLog.Log4Net
         /// <param name="args">The args.</param>
         public void FatalFormat(string format, params object[] args)
         {
-            m_Log.FatalFormat(format, args);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Fatal, string.Format(format, args));
         }
 
         /// <summary>
@@ -287,7 +281,7 @@ namespace AnyLog.Log4Net
         /// <param name="args">The args.</param>
         public void FatalFormat(IFormatProvider provider, string format, params object[] args)
         {
-            m_Log.FatalFormat(provider, format, args);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Fatal, string.Format(provider, format, args));
         }
 
         /// <summary>
@@ -298,7 +292,7 @@ namespace AnyLog.Log4Net
         /// <param name="arg1">The arg1.</param>
         public void FatalFormat(string format, object arg0, object arg1)
         {
-            m_Log.FatalFormat(format, arg0, arg1);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Fatal, string.Format(format, arg0, arg1));
         }
 
         /// <summary>
@@ -310,7 +304,7 @@ namespace AnyLog.Log4Net
         /// <param name="arg2">The arg2.</param>
         public void FatalFormat(string format, object arg0, object arg1, object arg2)
         {
-            m_Log.FatalFormat(format, arg0, arg1, arg2);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Fatal, string.Format(format, arg0, arg1, arg2));
         }
 
         /// <summary>
@@ -319,7 +313,7 @@ namespace AnyLog.Log4Net
         /// <param name="message">The message.</param>
         public void Info(object message)
         {
-            m_Log.Info(message);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Info, message);
         }
 
         /// <summary>
@@ -329,7 +323,7 @@ namespace AnyLog.Log4Net
         /// <param name="exception">The exception.</param>
         public void Info(object message, Exception exception)
         {
-            m_Log.Info(message, exception);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Info, message + Environment.NewLine + exception.Message + exception.StackTrace);
         }
 
         /// <summary>
@@ -339,7 +333,7 @@ namespace AnyLog.Log4Net
         /// <param name="arg0">The arg0.</param>
         public void InfoFormat(string format, object arg0)
         {
-            m_Log.InfoFormat(format, arg0);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Info, string.Format(format, arg0));
         }
 
         /// <summary>
@@ -349,7 +343,7 @@ namespace AnyLog.Log4Net
         /// <param name="args">The args.</param>
         public void InfoFormat(string format, params object[] args)
         {
-            m_Log.InfoFormat(format, args);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Info, string.Format(format, args));
         }
 
         /// <summary>
@@ -360,7 +354,7 @@ namespace AnyLog.Log4Net
         /// <param name="args">The args.</param>
         public void InfoFormat(IFormatProvider provider, string format, params object[] args)
         {
-            m_Log.InfoFormat(provider, format, args);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Info, string.Format(provider, format, args));
         }
 
         /// <summary>
@@ -371,7 +365,7 @@ namespace AnyLog.Log4Net
         /// <param name="arg1">The arg1.</param>
         public void InfoFormat(string format, object arg0, object arg1)
         {
-            m_Log.InfoFormat(format, arg0, arg1);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Info, string.Format(format, arg0, arg1));
         }
 
         /// <summary>
@@ -383,7 +377,7 @@ namespace AnyLog.Log4Net
         /// <param name="arg2">The arg2.</param>
         public void InfoFormat(string format, object arg0, object arg1, object arg2)
         {
-            m_Log.InfoFormat(format, arg0, arg1, arg2);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Info, string.Format(format, arg0, arg1, arg2));
         }
 
         /// <summary>
@@ -392,7 +386,7 @@ namespace AnyLog.Log4Net
         /// <param name="message">The message.</param>
         public void Warn(object message)
         {
-            m_Log.Warn(message);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Warn, message);
         }
 
         /// <summary>
@@ -402,7 +396,7 @@ namespace AnyLog.Log4Net
         /// <param name="exception">The exception.</param>
         public void Warn(object message, Exception exception)
         {
-            m_Log.Warn(message, exception);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Warn, message + Environment.NewLine + exception.Message + exception.StackTrace);
         }
 
         /// <summary>
@@ -412,7 +406,7 @@ namespace AnyLog.Log4Net
         /// <param name="arg0">The arg0.</param>
         public void WarnFormat(string format, object arg0)
         {
-            m_Log.WarnFormat(format, arg0);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Warn, string.Format(format, arg0));
         }
 
         /// <summary>
@@ -422,7 +416,7 @@ namespace AnyLog.Log4Net
         /// <param name="args">The args.</param>
         public void WarnFormat(string format, params object[] args)
         {
-            m_Log.WarnFormat(format, args);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Warn, string.Format(format, args));
         }
 
         /// <summary>
@@ -433,7 +427,7 @@ namespace AnyLog.Log4Net
         /// <param name="args">The args.</param>
         public void WarnFormat(IFormatProvider provider, string format, params object[] args)
         {
-            m_Log.WarnFormat(provider, format, args);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Warn, string.Format(provider, format, args));
         }
 
         /// <summary>
@@ -444,7 +438,7 @@ namespace AnyLog.Log4Net
         /// <param name="arg1">The arg1.</param>
         public void WarnFormat(string format, object arg0, object arg1)
         {
-            m_Log.WarnFormat(format, arg0, arg1);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Warn, string.Format(format, arg0, arg1));
         }
 
         /// <summary>
@@ -456,8 +450,9 @@ namespace AnyLog.Log4Net
         /// <param name="arg2">The arg2.</param>
         public void WarnFormat(string format, object arg0, object arg1, object arg2)
         {
-            m_Log.WarnFormat(format, arg0, arg1, arg2);
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Warn, string.Format(format, arg0, arg1, arg2));
         }
+
 
         /// <summary>
         /// Logs the specified logging data.
@@ -466,18 +461,7 @@ namespace AnyLog.Log4Net
         /// <exception cref="System.NotSupportedException"></exception>
         public void Log(LoggingData loggingData)
         {
-            var loggingEventData = new LoggingEventData();
-
-            loggingEventData.Domain = loggingData.Domain;
-            loggingEventData.ExceptionString = loggingData.ExceptionString;
-            loggingEventData.LoggerName = loggingData.LoggerName;
-            loggingEventData.Level = s_LevelDict[loggingData.Level];
-            loggingEventData.Message = loggingData.Message;
-            loggingEventData.ThreadName = loggingData.ThreadName;
-            loggingEventData.TimeStamp = loggingData.TimeStamp;
-            loggingEventData.UserName = loggingData.UserName;
-
-            m_Log.Logger.Log(new LoggingEvent(loggingEventData));
+            throw new NotSupportedException();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace AnyLog
     /// <summary>
     /// LogFactory Base class
     /// </summary>
-    public abstract class LogFactoryBase : ILogFactory
+    public abstract class LoggerFactoryBase : ILoggerFactory
     {
         /// <summary>
         /// Gets the config file file path.
@@ -37,7 +37,7 @@ namespace AnyLog
                 if (File.Exists(filePath))
                 {
                     ConfigFile = filePath;
-                    m_LogInventory = CreateLogInventory();
+                    m_LoggerInventory = CreateLoggerInventory();
                     return true;
                 }
             }
@@ -57,15 +57,15 @@ namespace AnyLog
         }
 
         /// <summary>
-        /// Gets the log by name.
+        /// Gets the logger by name.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns></returns>
-        public abstract ILog GetLog(string name);
+        public abstract ILog GetLogger(string name);
 
-        protected abstract ILogInventory CreateLogInventory();
+        protected abstract ILoggerInventory CreateLoggerInventory();
 
-        private ILogInventory m_LogInventory;
+        private ILoggerInventory m_LoggerInventory;
 
         private ConcurrentDictionary<string, ILog> m_LoggersDict = new ConcurrentDictionary<string, ILog>(StringComparer.OrdinalIgnoreCase);
 
@@ -86,7 +86,7 @@ namespace AnyLog
         /// <param name="repositoryName">Name of the repository.</param>
         /// <param name="name">The name.</param>
         /// <returns></returns>
-        public virtual ILog GetLog(string repositoryName, string name)
+        public virtual ILog GetLogger(string repositoryName, string name)
         {
             var logKey = repositoryName + "-" + name;
 
@@ -97,7 +97,7 @@ namespace AnyLog
             if (loggerDict.TryGetValue(logKey, out log))
                 return log;
 
-            log = m_LogInventory.CreateLogFromRepository(repositoryName, name);
+            log = m_LoggerInventory.CreateLoggerFromRepository(repositoryName, name);
 
             if (log == null)
                 return null;
@@ -114,12 +114,12 @@ namespace AnyLog
 
         public ILog GetCurrentClassLogger()
         {
-            return GetLog(GetClassName(false));
+            return GetLogger(GetClassName(false));
         }
 
         public ILog GetCurrentClassLogger(bool shortName)
         {
-            return GetLog(GetClassName(shortName));
+            return GetLogger(GetClassName(shortName));
         }
 
         private static string GetClassName(bool shortName)

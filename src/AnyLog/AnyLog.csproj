@@ -40,17 +40,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalAssemblyInfo.cs" />
-    <Compile Include="ConsoleLog.cs" />
-    <Compile Include="ConsoleLogFactory.cs" />
+    <Compile Include="ConsoleLogger.cs" />
+    <Compile Include="ConsoleLoggerFactory.cs" />
     <Compile Include="ILog.cs" />
-    <Compile Include="ILogFactory.cs" />
-    <Compile Include="ILogFactoryMetadata.cs" />
-    <Compile Include="ILogFactoryProvider.cs" />
+    <Compile Include="ILoggerFactory.cs" />
+    <Compile Include="ILoggerFactoryMetadata.cs" />
+    <Compile Include="ILoggerFactoryProvider.cs" />
     <Compile Include="ILoggerProvider.cs" />
     <Compile Include="LocationInfo.cs" />
-    <Compile Include="LogFactory.cs" />
-    <Compile Include="LogFactoryBase.cs" />
-    <Compile Include="LogFactoryMetadataAttribute.cs" />
+    <Compile Include="LoggerFactory.cs" />
+    <Compile Include="LoggerFactoryBase.cs" />
+    <Compile Include="LoggerFactoryMetadataAttribute.cs" />
     <Compile Include="LogInventory.cs" />
     <Compile Include="LoggingData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

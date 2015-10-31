@@ -7,13 +7,13 @@ using NLog;
 
 namespace AnyLog.NLog
 {
-    public class NLogLog : ILog
+    public class NLogLogger : ILog
     {
         private Logger m_Logger;
 
         private static readonly IDictionary<string, LogLevel> s_LevelDict;
 
-        static NLogLog()
+        static NLogLogger()
         {
             s_LevelDict = new Dictionary<string, LogLevel>(StringComparer.OrdinalIgnoreCase);
             s_LevelDict.Add("Alert", LogLevel.Warn);
@@ -34,7 +34,7 @@ namespace AnyLog.NLog
             s_LevelDict.Add("Warn", LogLevel.Warn);
         }
 
-        public NLogLog(Logger logger)
+        public NLogLogger(Logger logger)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");

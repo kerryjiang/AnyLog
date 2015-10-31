@@ -8,7 +8,7 @@ namespace AnyLog
     /// <summary>
     /// Log factory metadata interface
     /// </summary>
-    public interface ILogFactoryMetadata
+    public interface ILoggerFactoryMetadata
     {
         /// <summary>
         /// Gets the name of the log factory.

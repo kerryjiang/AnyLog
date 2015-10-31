@@ -75,8 +75,8 @@
     <Compile Include="..\AnyLog\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="EnterpriseLibraryLog.cs" />
-    <Compile Include="EnterpriseLibraryLogFactory.cs" />
+    <Compile Include="EnterpriseLibraryLogger.cs" />
+    <Compile Include="EnterpriseLibraryLoggerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

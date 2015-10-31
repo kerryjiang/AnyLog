@@ -8,7 +8,7 @@ namespace AnyLog
     /// <summary>
     /// LogFactory Interface
     /// </summary>
-    public interface ILogFactory
+    public interface ILoggerFactory
     {
         /// <summary>
         /// Initializes the specified configuration files, we only use the first found one
@@ -18,18 +18,18 @@ namespace AnyLog
         bool Initialize(string[] configFiles);
 
         /// <summary>
-        /// Gets the log by name.
+        /// Gets the logger by name.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns></returns>
-        ILog GetLog(string name);
+        ILog GetLogger(string name);
 
         /// <summary>
-        /// Gets the log from the specific repository.
+        /// Gets the logger from the specific repository.
         /// </summary>
         /// <param name="repositoryName">Name of the repository.</param>
         /// <param name="name">The name.</param>
         /// <returns></returns>
-        ILog GetLog(string repositoryName, string name);
+        ILog GetLogger(string repositoryName, string name);
     }
 }
