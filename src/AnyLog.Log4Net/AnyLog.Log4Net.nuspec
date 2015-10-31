@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
+    <id>AnyLog.Log4Net</id>
     <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <title>AnyLog.Log4Net</title>
+    <authors>Kerry Jiang</authors>
+    <owners>Kerry Jiang</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
     <projectUrl>https://github.com/kerryjiang/AnyLog</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
-    <releaseNotes>First release of Log4Net adapter of AnyLog.</releaseNotes>
+    <description>Log4Net adapter for AnyLog</description>
+    <releaseNotes></releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Logging Adapter Log4Net</tags>
     <dependencies>
@@ -18,4 +18,8 @@
       <dependency id="log4net" version="2.0.3" />
     </dependencies>
   </metadata>
+  <files>
+    <file src="bin\Release\net40\AnyLog.Log4Net.dll" target="lib/net40" />
+    <file src="bin\Release\net45\AnyLog.Log4Net.dll" target="lib/net45" />
+  </files>
 </package>

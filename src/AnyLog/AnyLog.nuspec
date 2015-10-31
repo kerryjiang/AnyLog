@@ -1,17 +1,21 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
+    <id>AnyLog</id>
     <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <title>AnyLog</title>
+    <authors>Kerry Jiang</authors>
+    <owners>Kerry Jiang</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
     <projectUrl>https://github.com/kerryjiang/AnyLog</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
-    <releaseNotes>First release of AnyLog.</releaseNotes>
+    <description>AnyLog core library</description>
+    <releaseNotes></releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Logging Adapter Common</tags>
   </metadata>
+  <files>
+    <file src="bin\Release\net40\AnyLog.dll" target="lib/net40" />
+    <file src="bin\Release\net45\AnyLog.dll" target="lib/net45" />
+  </files>
 </package>

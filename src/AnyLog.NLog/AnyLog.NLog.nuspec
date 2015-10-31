@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
+    <id>AnyLog.NLog</id>
     <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <title>AnyLog.NLog</title>
+    <authors>Kerry Jiang</authors>
+    <owners>Kerry Jiang</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
     <projectUrl>https://github.com/kerryjiang/AnyLog</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
-    <releaseNotes>First release of NLog adapter of AnyLog.</releaseNotes>
+    <description>NLog adapter for AnyLog</description>
+    <releaseNotes></releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Logging Adapter NLog</tags>  
     <dependencies>
@@ -18,4 +18,8 @@
       <dependency id="NLog" version="3.2.0.0" />
     </dependencies>
   </metadata>
+  <files>
+    <file src="bin\Release\net40\AnyLog.NLog.dll" target="lib/net40" />
+    <file src="bin\Release\net45\AnyLog.NLog.dll" target="lib/net45" />
+  </files>
 </package>
