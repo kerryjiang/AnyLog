@@ -1,2 +1,6 @@
 language: csharp
-solution: src/AnyLog-Net45.sln
+script:
+   - nuget restore src/AnyLog-Net40.sln
+   - xbuild src/AnyLog-Net40.sln
+   - nuget restore src/AnyLog-Net45.sln
+   - xbuild src/AnyLog-Net45.sln
