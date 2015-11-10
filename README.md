@@ -6,9 +6,9 @@ A logging framework abstraction like Common.Logging but will be simpler than it 
 **NuGet Packages:**
 
 |        AnyLog     |   AnyLog.Log4Net   |    AnyLog.NLog      |
-|-------------------|------------------- |---------------------|
-| [![AnyLog][1]][2] | [![AnyLog][3]][4]  | [![AnyLog][5]][6]   |
-| [![AnyLog][7]][8] | [![AnyLog][9]][10] | [![AnyLog][11]][12] |
+|-------------------|--------------------|---------------------|
+| [![AnyLog][1]][2] | [![AnyLog.Log4Net][3]][4]  | [![AnyLog.NLog][5]][6]   |
+| [![AnyLog][7]][8] | [![AnyLog.Log4Net][9]][10] | [![AnyLog].NLog[11]][12] |
 
 [1]: https://img.shields.io/nuget/v/AnyLog.svg?style=flat
 [2]: https://www.nuget.org/packages/AnyLog
