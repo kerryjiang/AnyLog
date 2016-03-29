@@ -231,7 +231,7 @@ namespace AnyLog
         /// <param name="arg2">The arg2.</param>
         public void ErrorFormat(string format, object arg0, object arg1, object arg2)
         {
-            Console.WriteLine(m_MessageTemplate, m_Name, m_Error, string.Format(format, arg0, arg2));
+            Console.WriteLine(m_MessageTemplate, m_Name, m_Error, string.Format(format, arg0, arg1, arg2));
         }
 
         /// <summary>
